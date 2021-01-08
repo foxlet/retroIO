@@ -30,12 +30,12 @@ The ASM1083 is cheaper (around $10 USD) but generally single-slot and might have
 
 Note that most motherboards with a built-in PCI slot use the ASM1083 bridge chip.
 
-P17C9X11x
+PI7C9X11x  
 https://www.aliexpress.com/item/32975912171.html  
 https://www.ebay.com/itm/311915485839  
 https://www.ebay.com/itm/143648841107  
 
-ASM1083
+ASM1083  
 https://www.aliexpress.com/item/4001221339492.html (single-slot)  
 https://www.aliexpress.com/item/1005001373451558.html (dual-slot)  
 
