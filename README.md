@@ -14,13 +14,14 @@ You Will Need
   - AMD or Intel PC with support for AMD-Vi/VT-d
   - Linux
   - PCIe/PCI cards to use with the retro VM
-  - PCI bridge riser (if needed)
+  - PCI bridge riser (if needed on your motherboard)
     
 Most AMD Ryzen CPUs with B450/X470 boards support VFIO, alongside higher end Intel CPUs (check your specs!)
 
 Supported Emulators
 -------------------
   - QEMU
+  - 86Box (fork of PCem) (WIP at https://github.com/richardg867/86Box)
 
 PCI Bridge Options
 ------------------
@@ -28,7 +29,7 @@ There are two major PCI to PCIe bridge chips available, the ASM1083 (from ASMedi
 
 The ASM1083 is cheaper (around $10 USD) but generally single-slot and might have bugs with certain hardware (such as Firewire cards); it is recommended for sound cards and low speed PCI devices. The PI7C9X11x is more expensive ($20) but better supports hardware, including dual-slot and 66Mhz mode.
 
-Note that most motherboards with a built-in PCI slot use the ASM1083 bridge chip.
+Most motherboards with a built-in PCI slot use the ASM1083 bridge chip.
 
 PI7C9X11x  
 https://www.aliexpress.com/item/32975912171.html  
@@ -45,19 +46,33 @@ Hardware
 Video Card Options
 ------------------
 The choices are pretty extensive, but you will need to get a video card that supports the operating system you plan to use. Some starting examples include:
-  - NVIDIA Quadro FX 3500 (PCIe, 2000/XP/Vista/7/8)
+  - NVIDIA Quadro FX 3500 (PCIe, 98SE/2000/XP/Vista/7/8)
   - ATI Radeon X300 (PCIe, 98/ME/2000/XP)
   - Cirrus Logic GD5446 (PCI, 3.1/95/98/ME/NT/2000)
     
 Software
 ========
-Practically any operating system that can run on a PC BIOS is supported. QEMU by default uses SeaBIOS for its firmware, and this supports booting:
+
+QEMU
+----
+Practically any operating system that can run on a PC BIOS is supported. QEMU uses SeaBIOS for its firmware, and this supports booting:
   - Windows NT4/2000/XP/Vista/7/8/10
   - Windows 95/98/98SE/ME
   - DOS 6.22 + Win 3.1/3.11
   - Linux
     
-QEMU supports both hardware-accelerated and software CPU modes. The latter allows more control of the CPU speed for cycle-sensitive games in combination with `cpulimit`, although this isn't perfect.
+QEMU supports both hardware-accelerated and software CPU modes. The latter allows some control of the CPU speed for cycle-sensitive games in combination with `cpulimit`, although this isn't perfect.
+
+86Box 
+-----
+This emulator specializes in retro PC hardware, and is far more stable for older operating systems from the DOS/Windows 3.x era up to Windows XP. The BIOS can vary depending on the emulated CPU and motherboard platform chosen, but any GPU with legacy VBIOS support should work.
+
+To configure 86Box for VFIO, add the following lines to `86box.cfg` with the corresponding group and ROM file (if needed).
+```
+[VFIO]
+01:00.0_rom_fn = /path/to/myvbios.rom
+devices = 01:00.0
+```
 
 FAQ
 ===
